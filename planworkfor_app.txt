@@ -1,0 +1,61 @@
+
+Voting Machine Application
+
+It will be a Backend application for a voting system where users can vote for candidates. It provides functionalities for user authentication, candidate management, and voting.
+
+Features:
+
+1. User Sign In and Sign UP.
+2. List of the candidates.
+3. Vote for a candidate like party.
+4. Vote one of the candidates and only one time user can vote.
+5. Admin functionalities to add/remove candidates.
+6. View voting results.
+7.We will be creating a route which shows their list of the candidates and thier live vote count.
+8.user will need to sign up on the app with his/her addhar card which is a goverment ID
+9.Their will an admin who will maintain all the data of the USER and party but Admin can't Vote
+10. User will be able to change Password and only login in using addhar unqiue Number 
+
+-------------------------------------------------------
+
+Routers 
+
+User Authentication:
+/signup: POST - Create a new user account.
+/login: POST - Log in to an existing account. [ aadhar card number + password ]
+
+Voting:
+/candidates: Got - Get the list of candidates.
+/vote/:candidateId: POST - Vote for a specific candidate.
+
+Vote Counts:
+/vote/counts: GET - Get the list of candidates sorted by their vote counts.
+
+User Profile:
+/profile: GET - Get the user's profile information.
+/profile/password: PUT - Change the user's password.
+
+Admin Candidate Management:
+/candidates: POST - Create a new candidate.
+/candidates/: candidateId: PUT - Update an existing candidate.
+/candidates/: candidateId: DELETE - Delete a candidate from the list.
+
+
+
+
+
+
+
+
+
+
+
+Tech Stack 
+
+1. The application will be built using Node.js and Express for the backend.
+2. MongoDB will be used for data storage.
+3. JWT (JSON Web Tokens) will be used for user authentication.
+4. Mongoose will be used for MongoDB object modeling.
+5. React.Js will be used for the Frontend of the Voting Machine 
+
+ 
