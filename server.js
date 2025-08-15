@@ -1,28 +1,43 @@
-const express = require('express')
-const app = express();
+const express = require('express');
+const path = require('path');
 const db = require('./db');
 require('dotenv').config();
 
-const bodyParser = require('body-parser'); // Import body-parser to parse request bodies
-app.use(bodyParser.json()); // Use body-parser to parse JSON request bodies
-const PORT = process.env.PORT || 3000; // Set the port to listen on, defaulting to 3000 if not specified
+const app = express();
 
+// Middleware
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
+const PORT = process.env.PORT || 3000;
 
-// Import the router files
+// Import routes
 const userroutes = require('./routes/userroutes');
 const candidateroutes = require('./routes/candidateroutes');
 
-// Use the routers
-app.use('/user', userroutes);
-app.use('/candidate',candidateroutes);
+// API routes
+app.use('/api/user', userroutes);
+app.use('/api/candidate', candidateroutes);
 
-  
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, 'client')));
 
+// Route for main voting page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
 
+// Route for admin panel
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'admin.html'));
+});
 
+// Fallback for any other unknown routes (optional)
+app.get('*', (req, res) => {
+  res.status(404).send('Page Not Found');
+});
 
+// Start server
 app.listen(PORT, () => {
-  console.log('Server is running on http://localhost:3000')
-}) // Start the server on port 3000
-
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Voting App</title>
+    <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+ <nav class="nav">
+    <h1 class="head">Voting App</h1>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <div id="nav-menu">
+      <ul>
+        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="/admin"><i class="fas fa-user-shield"></i> Admin</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="/admin-signup.html"><i class="fas fa-user-shield"></i> Admin Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    <main>
+        <h1>Admin Panel</h1>
+
+        <section id="login-section">
+            <h2>Login</h2>
+            <input type="text" id="admin-aadhar" placeholder="Admin Aadhar Number">
+            <input type="password" id="admin-password" placeholder="Password">
+            <button id="admin-login-btn">Login</button>
+        </section>
+
+        <section id="admin-section" style="display: none;">
+            <h2>Add Candidate</h2>
+            <input type="text" id="candidate-name" placeholder="Name">
+            <input type="text" id="candidate-party" placeholder="Party">
+            <button id="add-candidate-btn">Add Candidate</button>
+
+            <h2>Candidate List</h2>
+            <div id="admin-candidates"></div>
+
+            <h2>Vote Counts</h2>
+            <div id="vote-counts"></div>
+        </section>
+    </main>
+
+    <script src="admin.js">
+
+        // Toggle mobile menu
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('nav-links').classList.toggle('show');
+        });
+
+        // Highlight active link
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            }
+        });
+
+
+    </script>
+
+
+     <footer class="footer">
+    <p>© 2025 Voting App. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+</body>
+
+</html>

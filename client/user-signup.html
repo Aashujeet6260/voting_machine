@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Sign Up - Voting App</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="stylesheet" href="./index.html">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <h1 class="head">Voting App</h1>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <div id="nav-menu">
+      <ul>
+        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="/admin"><i class="fas fa-user-shield"></i> Admin</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h2>User Sign Up</h2>
+    <input type="text" id="name" placeholder="Full Name" />
+    <input type="number" id="age" placeholder="Age" min="18" />
+    <input type="text" id="address" placeholder="Address" />
+    <input type="text" id="aadhar" placeholder="Aadhar Card Number (12 digits)" maxlength="12"/>
+    <input type="password" id="password" placeholder="Password" />
+    <button id="signupBtn">Sign Up</button>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Voting App. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("signupBtn").addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const aadhar = document.getElementById("aadhar").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!name || !age || !address || !aadhar || !password) {
+        return alert("All fields are required.");
+      }
+      if (!/^\d{12}$/.test(aadhar)) {
+        return alert("Aadhar must be exactly 12 digits.");
+      }
+
+      const res = await fetch("/api/user/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          age: parseInt(age),
+          address,
+          aadharCardNumber: Number(aadhar),
+          password,
+          role: "voter"
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("User registered successfully!");
+        window.location.href = "/";
+      } else {
+        alert(data.error || "Error signing up.");
+      }
+    });
+  </script>
+
+</body>
+</html>
