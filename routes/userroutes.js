@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./../models/user'); // Import the User model
+const User = require('./../models/User');
 const { jwtAuthMiddleware, generateToken } = require('./../jwt');
 
 // POST route to add a person
